@@ -30,7 +30,6 @@ export default function App() {
 
 function Header() {
   return (
-    <>
     <Link to="/">
       <div id="header">
         <div id="hContent">
@@ -38,7 +37,6 @@ function Header() {
         </div>
       </div>
       </Link>
-    </>
   )
 }
 function Search() {
