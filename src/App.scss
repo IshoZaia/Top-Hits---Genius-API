@@ -3,6 +3,7 @@ html, body {
    }
 #desc{
     text-align: center;
+    padding: 10px;
 }
 #hContent{
     text-align: center;
@@ -19,9 +20,24 @@ html, body {
     display: flex;
     max-width: 50%;
 }
+#button:hover{
+    background-color: rgb(246, 246, 4);
+    color: black;
+}
 #search {
     margin: 0 auto;
     display: block;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 2px 10px 2px 10px;
+    outline: 0;
+    background-color: #f5f5f5;
+}
+#search:hover, #search:focus{
+    border: 1px solid rgb(0, 0, 0);
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
 }
 .ArtistSongs{
     border: 2px solid;

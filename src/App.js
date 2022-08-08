@@ -9,9 +9,12 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Song from './Song';
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
+import Navbar from "react-bootstrap/Navbar";
+
 export default function App() {
   return (
-      <BrowserRouter>
+    <BrowserRouter>
       <Header />
 
       <Routes>
@@ -19,7 +22,7 @@ export default function App() {
         <Route
           path="lyrics"
           element={
-            <Lyrics url="https://genius.com/Taylor-swift-exile-lyrics" />
+            <Lyrics />
           }
         />
         <Route path="song/:id" element={<Song />} />
@@ -30,13 +33,19 @@ export default function App() {
 
 function Header() {
   return (
-    <Link to="/">
-      <div id="header">
-        <div id="hContent">
-          Top 5s By Genius
-        </div>
-      </div>
-      </Link>
+    <Navbar bg={"dark"} variant={"dark"}>
+      <Container>
+        <Navbar.Brand>
+          <LinkContainer to={'/'}>
+            <img
+              src="https://o.remove.bg/downloads/d0ef0c2d-6e7f-48c0-8fd0-8cfd486a680a/flat_750x_075_f-pad_750x1000_f8f8f8-removebg-preview.png"
+              width='50px' alt="Genius Logo"/>
+          </LinkContainer> {" "}
+          Top 5's
+        </Navbar.Brand>
+        <Navbar.Brand href="https://rapidapi.com/brianiswu/api/genius/">Powered by Genius API</Navbar.Brand>
+      </Container>
+    </Navbar>
   )
 }
 function Search() {
@@ -62,8 +71,10 @@ function Search() {
         return fetch('https://genius.p.rapidapi.com/artists/' + artistID + '/songs?per_page=5&page=1&sort=popularity', options);
       })
       .then(response => response.json())
-      .then(response => {console.log(response)
-         setArtistName(response)})
+      .then(response => {
+        console.log(response)
+        setArtistName(response)
+      })
       .catch(err => console.error(err));
   }, [searched]);
 
@@ -76,41 +87,44 @@ function Search() {
         coverArt: artistName.response.songs[i].header_image_url,
         title: artistName.response.songs[i].title,
         release: artistName.response.songs[i].release_date_for_display,
+        lyrics: artistName.response.songs[i].url
       }
       )
     }
     return songList;
-    
+
   }
   return (
     <>
-    <Container className='w-100' fluid="md">
+      <Container className='w-100' fluid="md">
         <Row>
           <Col id="desc"><h2>Search for any artist to reveal their top 5 songs! </h2></Col>
         </Row>
       </Container>
-    <div className="text-center" >
-      <input type="text" name={"name"} id="search" placeholder='Search for an artist' onChange={onChangeHandler} value={searched.name}></input>
-    </div>
+      <div className="text-center" >
+        <input type="text" name={"name"} id="search" placeholder='Search for an artist' onChange={onChangeHandler} value={searched.name}></input>
+      </div>
       <SearchedArtist name={searched.name} />
-      <Container className="d-flex flex-col-md-4">
+      <Container style={{ padding: "10px" }} className="d-flex flex-col-md-4 p-10">
         {artistName.response && storeSongs().map((songsinfo) => {
           return (
-            <ArtistForm key={songsinfo.id} 
-            coverArt={songsinfo.coverArt} 
-            title={songsinfo.title} 
-            release={songsinfo.release} 
-            sample={songsinfo.sample} 
-            songLink={songsinfo.id} />)}
+            <ArtistForm key={songsinfo.id}
+              coverArt={songsinfo.coverArt}
+              title={songsinfo.title}
+              release={songsinfo.release}
+              sample={songsinfo.sample}
+              songLink={songsinfo.id}
+              lyrics={songsinfo.lyrics} />)
+        }
         )}
-        </Container>
+      </Container>
     </>
   )
 }
 
 function SearchedArtist(props) {
   return (
-    <h1 style={{textAlign: "center"}}>
+    <h1 style={{ textAlign: "center", padding: "10px" }}>
       {props.name}
     </h1>
   )
@@ -126,16 +140,9 @@ function ArtistForm(props) {
         <ListGroup.Item> {props.release}</ListGroup.Item>
       </ListGroup>
       <Card.Body>
-        <Link className="btn btn-primary" to={`song/${props.songLink}`} >Songs</Link>
-        <Card.Link className="btn btn-primary" href="#">Lyrics</Card.Link>
+        <Link id="button" className="btn btn-dark" to={`song/${props.songLink}`} >Songs</Link> {" "}
+        <Card.Link id="button" className="btn btn-dark" to={`lyrics`} url={props.lyrics}>Lyrics</Card.Link>
       </Card.Body>
     </Card>
-    /*<Row className='songs' key={props.id}>
-      <table className="ArtistSongs">
-      <th><Col>Title: {props.title}</Col></th>
-      <tr><Col>Release Date: {props.release}</Col></tr>
-      <tr><Col><img src={props.coverArt} width={250} height={250} alt="Artist Song Cover Art" /></Col></tr>
-      </table>
-    </Row>*/
   )
 }

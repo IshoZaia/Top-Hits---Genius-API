@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Container from 'react-bootstrap/Container';
+import './App.scss'
 
 export default function Song(props) {
     const options = {
@@ -28,6 +30,8 @@ export default function Song(props) {
     }
     else if (song.recording_location == null) {
         return (
+            <>
+            <Container style={{padding: "10px"}} className="col d-flex justify-content-center">
             <Card style={{ width: '18rem' }} className="text-center" key={props.id}>
                 <Card.Img variant="top" src={song.header_image_thumbnail_url} className="card-img-top" />
                 <Card.Body>
@@ -37,13 +41,17 @@ export default function Song(props) {
                     <ListGroup.Item>Release Date: {song.release_date_for_display}</ListGroup.Item>
                 </ListGroup>
                 <Card.Body>
-                    <Card.Link className="btn btn-primary" href={song.apple_music_player_url}>Listen to a Sample</Card.Link>
+                    <Card.Link id="button" className="btn btn-dark" href={song.apple_music_player_url}>Listen to a Sample</Card.Link>
                 </Card.Body>
             </Card>
+            </Container>
+            </>
         );
     }
     return (
-        <Card style={{ width: '18rem' }} className="text-center mx-auto" key={props.id}>
+        <>
+        <Container style={{padding: "10px"}} className="col d-flex justify-content-center">
+        <Card style={{ width: '18rem' }} className="text-center" key={props.id}>
             <Card.Img variant="top" src={song.header_image_thumbnail_url} className="card-img-top" />
             <Card.Body>
                 <Card.Title>{song.album.full_title}</Card.Title>
@@ -53,17 +61,10 @@ export default function Song(props) {
                 <ListGroup.Item>Recorded at: {song.recording_location}</ListGroup.Item>
             </ListGroup>
             <Card.Body>
-                <Card.Link className="btn btn-primary" href={song.apple_music_player_url}>Listen to a Sample</Card.Link>
+                <Card.Link id="button" className="btn btn-dark" href={song.apple_music_player_url}>Listen to a Sample</Card.Link>
             </Card.Body>
         </Card>
+        </Container>
+        </>
     );
-
-    /*<div>
-      <img src={song.header_image_thumbnail_url} alt="Thumbnail" /> <br />
-      {song.album.full_title}
-      <br />
-      Released:{song.release_date} <br />
-      <a href={song.relationships_index_url}>Have a sample</a> <br />
-      <a href={song.apple_music_player_url}>still interested?</a>
-    </div>*/
 }
