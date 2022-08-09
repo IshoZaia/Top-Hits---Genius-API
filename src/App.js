@@ -26,7 +26,6 @@ export default function App() {
     </BrowserRouter>
   );
 }
-
 function Header() {
   return (
     <Navbar bg={"dark"} variant={"dark"}>
