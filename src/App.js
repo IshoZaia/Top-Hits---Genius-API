@@ -13,6 +13,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import logo from "./Genius Logo.png"
 import twitter from "./Twitter Logo.png"
+import ig from "./Instagram Logo.png"
 export default function App() {
   return (
     <BrowserRouter>
@@ -161,7 +162,7 @@ function SubHeader(){
 function Socials(props){
   return(
 <Container className="text-center">
-<a href={`https://www.instagram.com/${props.instagram}`} ><img width="50px" src="https://assets.stickpng.com/images/5ecec78673e4440004f09e77.png" alt="instagram" /></a>{" "}
+<a href={`https://www.instagram.com/${props.instagram}`} ><img width="50px" src={ig} alt="instagram" /></a>{" "}
 <a href={`https://twitter.com/${props.twitter}`} ><img width="50px" src={twitter} alt="twitter" /></a>
 </Container>
   );
