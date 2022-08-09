@@ -1,0 +1,31 @@
+html, body {
+    margin: 0;
+   }
+#hContent{
+    text-align: center;
+    background-color: aquamarine;
+    margin: 0 auto;
+    padding: 50px;
+}
+#header{
+    max-width: 100%;
+    box-sizing: border-box;
+    font-size: larger;
+}
+.songContainer{
+    display: flex;
+    max-width: 50%;
+}
+.lyrics{
+    text-align: center;
+    padding: 10px;
+  width: 100%;
+  font-family: Garamond, serif;
+}
+.lyrics-H{
+    text-align: center;
+    padding: 10px;
+  width: 100%;
+  font-family: Garamond, serif;
+  background-color: yellow;
+}

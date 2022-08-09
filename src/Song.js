@@ -26,22 +26,50 @@ export default function Song(props) {
     }, []);
 
     if (song.album === undefined) {
-        return <h1 className="text-center">Please wait...</h1>;
+        return <h1 style={{padding: "200px"}} className="text-center">Please wait...</h1>;
     }
-    else if (song.recording_location == null) {
+    else if (song.recording_location == null && song.album !== null) {
         return (
+            <>
+            <SubHeader name={song.primary_artist.name} />
+            <Container style={{padding: "10px"}} className="col d-flex justify-content-center">
+            <Card style={{ width: '18rem' }} className="text-center" key={props.id}>
+                <Card.Img variant="top" src={song.header_image_thumbnail_url} className="card-img-top" />
+                <Card.Body>
+                    <Card.Title>Album<br/>{song.album.full_title}</Card.Title>
+                </Card.Body>
+                <ListGroup className="list-group-flush">
+                    <ListGroup.Item>Song<br/>{song.title} </ListGroup.Item>
+                    <ListGroup.Item>Release Date<br/> {song.release_date_for_display}</ListGroup.Item>
+                </ListGroup>
+                <Card.Body>
+                    <Card.Link id="button" className="btn btn-dark" href={song.apple_music_player_url}>Listen to a Sample</Card.Link>
+                    </Card.Body>
+                    <Card.Body>
+                    <Card.Link id="button" className="btn btn-dark" href={song.primary_artist.url}>Other Songs By {song.primary_artist.name}</Card.Link>
+                </Card.Body>
+            </Card>
+            </Container>
+            </>
+        );
+    }
+    else if(song.album == null){
+        return(
             <>
             <Container style={{padding: "10px"}} className="col d-flex justify-content-center">
             <Card style={{ width: '18rem' }} className="text-center" key={props.id}>
                 <Card.Img variant="top" src={song.header_image_thumbnail_url} className="card-img-top" />
                 <Card.Body>
-                    <Card.Title>{song.album.full_title}</Card.Title>
+                    <Card.Title>Song<br/>{song.title}</Card.Title>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
-                    <ListGroup.Item>Release Date: {song.release_date_for_display}</ListGroup.Item>
+                    <ListGroup.Item>Release Date<br/> {song.release_date_for_display}</ListGroup.Item>
                 </ListGroup>
                 <Card.Body>
                     <Card.Link id="button" className="btn btn-dark" href={song.apple_music_player_url}>Listen to a Sample</Card.Link>
+                    </Card.Body>
+                    <Card.Body>
+                    <Card.Link id="button" className="btn btn-dark" href={song.primary_artist.url}>Other Songs By {song.primary_artist.name}</Card.Link>
                 </Card.Body>
             </Card>
             </Container>
@@ -54,17 +82,26 @@ export default function Song(props) {
         <Card style={{ width: '18rem' }} className="text-center" key={props.id}>
             <Card.Img variant="top" src={song.header_image_thumbnail_url} className="card-img-top" />
             <Card.Body>
-                <Card.Title>{song.album.full_title}</Card.Title>
+                <Card.Title>Album<br/>{song.album.full_title}</Card.Title>
             </Card.Body>
             <ListGroup className="list-group-flush">
-                <ListGroup.Item>Release Date: {song.release_date_for_display}</ListGroup.Item>
-                <ListGroup.Item>Recorded at: {song.recording_location}</ListGroup.Item>
+            <ListGroup.Item>Song<br/>{song.title} </ListGroup.Item>
+                    <ListGroup.Item>Release Date<br/> {song.release_date_for_display}</ListGroup.Item>
+                <ListGroup.Item>Recorded at<br/> {song.recording_location}</ListGroup.Item>
             </ListGroup>
             <Card.Body>
-                <Card.Link id="button" className="btn btn-dark" href={song.apple_music_player_url}>Listen to a Sample</Card.Link>
+            <Card.Link id="button" className="btn btn-dark" href={song.apple_music_player_url}>Listen to a Sample</Card.Link>
+                    </Card.Body>
+                    <Card.Body>
+                    <Card.Link id="button" className="btn btn-dark" href={song.primary_artist.url}>Other Songs By {song.primary_artist.name}</Card.Link>
             </Card.Body>
         </Card>
         </Container>
         </>
     );
+}
+function SubHeader(props){
+    return(<>
+    <h2 id="songSub" >Find songs like this and others by {props.name}! </h2><br/>
+    </>)
 }
