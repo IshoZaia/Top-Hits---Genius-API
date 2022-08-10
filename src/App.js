@@ -89,7 +89,7 @@ function Search() {
         setSocials(response.response.artist)
       })
       .catch(err => console.error(err));
-  }, [searched, counter, artistID]);
+  }, [searched, counter]);
 
   let storeSongs = () => {
 
@@ -159,6 +159,14 @@ function SubHeader(){
 }
 
 function Socials(props){
+  if (!props.instagram){
+    return (
+      <Container className="text-center">
+      <img width="50px" src={ig} alt="instagram" />{" "}
+      <img width="50px" src={twitter} alt="twitter" />
+      </Container>
+    )
+  }
   return(
 <Container className="text-center">
 <a href={`https://www.instagram.com/${props.instagram}`} ><img width="50px" src={ig} alt="instagram" /></a>{" "}
