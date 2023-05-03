@@ -1,4 +1,4 @@
-School Project Created by Mike, Rodel and Myself.
+School Project Created by Mike, Rodel and Myself(Isho).
 
 The website is a simple react application that utilized the Genius API from Rapid API(Currently a Locked API)
 
