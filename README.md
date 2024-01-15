@@ -8,6 +8,3 @@ The user was able to route to a page that would display the lyrics to a song,
 visit the artists Genius webpage, 
 and reroute to a link where the audio could be played back to the user.
 
-Link to Webpage (API Not Working):
-https://topfiveapp.vercel.app/
-
